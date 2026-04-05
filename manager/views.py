@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from manager.forms import TagForm, TaskForm
@@ -11,7 +11,7 @@ def index(request):
 
 
 def toggle_task_done(request, pk):
-    task = Task.objects.get(pk=pk)
+    task = get_object_or_404(Task, pk=pk)
     task.is_done = not task.is_done
     task.save()
     return redirect("manager:index")
