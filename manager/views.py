@@ -5,7 +5,7 @@ from manager.models import Tag, Task
 
 
 def index(request):
-    tasks = Task.objects.prefetch_related("tags").order_by("done", "-datetime")
+    tasks = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
     return render(request, "manager/index.html", {"tasks": tasks})
 
 
