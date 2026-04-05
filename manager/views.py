@@ -9,10 +9,11 @@ def index(request):
     tasks = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
     return render(request, "manager/index.html", {"tasks": tasks})
 
-def toggle_task_done(request, pk):  
-    task = Task.objects.get(pk=pk)  
-    task.is_done = not task.is_done  
-    task.save()  
+
+def toggle_task_done(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.is_done = not task.is_done
+    task.save()
     return redirect("manager:index")
 
 
@@ -41,15 +42,15 @@ class TagListView(ListView):
 class TagCreateView(CreateView):
     model = Tag
     form_class = TagForm
-    success_url = reverse_lazy("manager:tag_list.html")
+    success_url = reverse_lazy("manager:tag-list")
 
 
 class TagUpdateView(UpdateView):
     model = Tag
     form_class = TagForm
-    success_url = reverse_lazy("manager:tag_list.html")
+    success_url = reverse_lazy("manager:tag-list")
 
 
 class TagDeleteView(DeleteView):
     model = Tag
-    success_url = reverse_lazy("manager:tag_list.html")
+    success_url = reverse_lazy("manager:tag-list")
