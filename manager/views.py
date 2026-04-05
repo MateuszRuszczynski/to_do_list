@@ -26,7 +26,6 @@ class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("manager:index")
-    success_url = reverse_lazy("manager:index")
 
 
 class TaskDeleteView(DeleteView):
@@ -37,7 +36,6 @@ class TaskDeleteView(DeleteView):
 class TagListView(ListView):
     model = Tag
     context_object_name = "tags"
-    template_name = "manager/tag_list.html"
 
 
 class TagCreateView(CreateView):
@@ -54,4 +52,4 @@ class TagUpdateView(UpdateView):
 
 class TagDeleteView(DeleteView):
     model = Tag
-    success_url = reverse_lazy("manager:index")
+    success_url = reverse_lazy("manager:tag_list.html")
