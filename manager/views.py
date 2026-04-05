@@ -1,44 +1,43 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from manager.models import Tag, Task
 
-def index(request):
-    return render(request, "manager/index.html")
 
+def index(request):
+    tasks = Task.objects.prefetch_related("tags").order_by("done", "-datetime")
+    return render(request, "manager/index.html", {"tasks": tasks})
 
 
 class TaskCreateView(CreateView):
     model = Task
     success_url = reverse_lazy("manager:index")
-    form_class = TaskForm
 
-  
+
 class TaskUpdateView(UpdateView):
     model = Task
     success_url = reverse_lazy("manager:index")
-    form_class = TaskForm
 
 
 class TaskDeleteView(DeleteView):
     model = Task
     success_url = reverse_lazy("manager:index")
 
-  
-class TagDetailView(DetailView):
+
+class TagListView(ListView):
     model = Tag
+    context_object_name = "tags"
+    template_name = "manager/tag_list.html"
 
 
 class TagCreateView(CreateView):
     model = Tag
     success_url = reverse_lazy("manager:tag_list.html")
-    form_class = TagForm
 
 
 class TagUpdateView(UpdateView):
     model = Tag
     success_url = reverse_lazy("manager:tag_list.html")
-    form_class = TagForm
 
 
 class TagDeleteView(DeleteView):

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "crispy_bootstrap5",
-    "manager"
+    "manager",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,7 @@ ROOT_URLCONF = "task_manager.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['task_manager/templates'],
+        "DIRS": ["task_manager/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
