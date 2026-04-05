@@ -17,7 +17,7 @@
       <span class="text-success">(Done)</span>
       {% endif %}
     </h5>
-    <p class="text-muted">Created: {{ task.created_at|date:"M d, Y, H:i" }}</p>
+    <p class="text-muted">Created: {{ task.datetime|date:"M d, Y, H:i" }}</p>
     {% if task.deadline %}
     <p class="text-danger">Deadline: {{ task.deadline }}</p>
     {% endif %}
@@ -34,7 +34,7 @@
       >Update</a
     >
     <a
-      href=""
+      href="{% url 'manager:task_delete' task.pk %}"
       class="btn btn-sm btn-outline-danger"
       >Delete</a
     >
