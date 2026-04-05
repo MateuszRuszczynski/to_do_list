@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from manager.forms import TagForm, TaskForm
@@ -8,6 +8,12 @@ from manager.models import Tag, Task
 def index(request):
     tasks = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
     return render(request, "manager/index.html", {"tasks": tasks})
+
+def toggle_task_done(request, pk):  
+    task = Task.objects.get(pk=pk)  
+    task.is_done = not task.is_done  
+    task.save()  
+    return redirect("manager:index")
 
 
 class TaskCreateView(CreateView):

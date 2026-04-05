@@ -22,6 +22,8 @@ class TaskForm(forms.ModelForm):
                 'rows': 4,
                 'placeholder': 'What needs to be done?',
             }),
-            'deadline': forms.DateTimeInput(),
+            'deadline': forms.DateTimeInput(attrs={
+                'type': 'date'
+            }),
             'tags': forms.CheckboxSelectMultiple(),
         }
